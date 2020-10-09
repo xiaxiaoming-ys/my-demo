@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 350px;
+            height: 350px;
+            margin: 100px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+
+        .big {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            left: 360px;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            display: none;
+        }
+
+        .big img {
+            position: absolute;
+        }
+
+        .mask {
+            width: 175px;
+            height: 175px;
+            background: rgba(255, 255, 0, 0.4);
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            cursor: move;
+            display: none;
+        }
+
+        .small {
+            position: relative;
+            height: 350px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box">
+        <div class="small">
+            <img src="images/small.jpg" width="350" alt="" />
+            <!-- 黄色蒙层 -->
+            <div class="mask"></div>
+
+        </div>
+        <!-- 大图展示 -->
+        <div class="big">
+            <img src="images/big.jpg" width="800" alt="" />
+        </div>
+    </div>
+
+    <!-- js工具函数 -->
+    <script src="common.js"></script>
+
+    <script>
+        var box = $id('box');
+        // 小图盒子
+        var smallBox = box.children[0];
+        // 大图盒子
+        var bigBox = box.children[1];
+        // 小商品图展示
+        var mask = smallBox.children[1];
+        // 大图展示
+        var img = bigBox.children[0];
+
+        //鼠标移上小盒子 让弹层 和大盒子一起出来
+        smallBox.onmouseenter = function () {
+            mask.style.display = 'block';
+            bigBox.style.display = 'block';
+        }
+
+        //鼠标在盒子上面移动 弹层 要跟着移动
+        smallBox.onmousemove = function (e) {
+            // 兼容写法  获取鼠标位置偏移
+            var e = e || window.event,
+                maskX = e.pageX - box.offsetLeft,
+                maskY = e.pageY - box.offsetTop;
+
+            //让鼠标在黄色mask中居中
+            maskX = maskX - mask.offsetWidth / 2;
+            maskY = maskY - mask.offsetHeight / 2;
+
+            //限制移动范围
+            maskX = maskX < 0 ? 0 : maskX;
+            maskY = maskY < 0 ? 0 : maskY;
+
+            //smallbox宽 - mask 宽
+            maskX = maskX > (smallBox.offsetWidth - mask.offsetWidth) ? smallBox.offsetWidth - mask.offsetWidth :
+                maskX;
+            maskY = maskY > (smallBox.offsetHeight - mask.offsetHeight) ? smallBox.offsetHeight - mask
+                .offsetHeight : maskY;
+
+            // if(maskX > smallBox.offsetWidth - mask.offsetWidth){
+            //     maskX = smallBox.offsetWidth - mask.offsetWidth;
+            // }
+
+            // if(maskY > smallBox.offsetHeight - mask.offsetHeight){
+            //     maskY = smallBox.offsetHeight - mask.offsetHeight;
+            // }
+
+            mask.style.left = maskX + 'px';
+            mask.style.top = maskY + 'px';
+
+            //大图片要跟着移动
+
+            //mask移动的距离      大图片移动的距离
+            //mask移动的距离 / mask最大能够移动的距离  = 大图片移动的距离 / 大图片最大能够移动的距离
+            // maskX / (smallBox.offsetWidth - mask.offsetWidth) = m / imgMaxX
+            // maskY / (smallBox.offsetHeight - mask.offsetHeight) = m / imgMaxY
+            var imgMaxX = img.offsetWidth - bigBox.offsetWidth;
+            var imgMaxY = img.offsetHeight - bigBox.offsetHeight;
+
+            var maskMaxX = smallBox.offsetWidth - mask.offsetWidth;
+            var maskMaxY = smallBox.offsetHeight - mask.offsetHeight;
+
+            var bigImgX = maskX / maskMaxX * imgMaxX;
+            var bigImgY = maskY / maskMaxY * imgMaxY;
+            
+            // 设置X Y轴偏移
+            img.style.left = -bigImgX + 'px';
+            img.style.top = -bigImgY + 'px';
+        }
+
+
+        //鼠标移开的时候 弹层和大盒子消失
+        smallBox.onmouseleave = function () {
+            mask.style.display = 'none';
+            bigBox.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

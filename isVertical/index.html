@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=750,target-densitydpi=device-dpi,user-scalable=no" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>横竖屏提示</title>
+  <style>
+    /*提示横屏*/
+    .land{ display: none; z-index: 9999; position: fixed; width: 100%; height: 102%; z-index: 9999;background-color:#fff;  }
+    .land img,.land div,.land p{ position: absolute;}
+    img.land_phone1,img.land_phone2{  left: 50%; margin-left: -5vw; width: 6vw ; top: 30%; }
+    .land_phone2{ z-index: 10; -webkit-animation: land_phone2 1.5s infinite ease-in-out; -webkit-transform-origin: 10% 90%;}
+    img.land_arrow{ width: 3.21vw; height: 2.59vw; left: 50%; margin-left: 4vw; top:36%;}
+    .land p{ position: absolute; -webkit-transform: scale(0.8); top: 68%; width: 100%; text-align: center; text-align: center; font-size: 3vw; color: #000;}
+    @keyframes land_phone2 {
+    0%,30%,100%{ -webkit-transform: rotate(90deg)}
+    55%,70%{ -webkit-transform: rotate(0deg)}
+    }
+  </style>
+</head>
+<body>
+  <!-- 横屏提示 -->
+  <div class="land">
+    <img src="img/land_phone.png" alt="" class="land_phone1">
+    <img src="img/land_phone.png" alt="" class="land_phone2">
+    <img src="img/land_arrow.png" alt="" class="land_arrow">
+    <p class="land_text">为了获取最佳体验，请竖屏浏览哟~</p>
+  </div>
+
+  <script type="text/javascript">
+    window.onload = function(){
+      var winW = window.innerWidth;
+      var winH = window.innerHeight;
+      document.querySelector('.land').ontouchmove = function (e) {
+          return false
+      };
+      if (winW > winH) {
+        document.querySelector('.land').style.display = 'block';
+      }
+      // 监听横竖屏
+      window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function () {
+        if (window.orientation === 180 || window.orientation === 0) {
+            document.querySelector('.land').style.display = 'none';
+        }
+        if (window.orientation === 90 || window.orientation === -90) {
+            document.querySelector('.land').style.display = 'block';
+        }
+      }, false);
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+  <!-- 未改动 -->
+  <!-- <style>
+    /*提示横屏*/
+    .land{ display: none; z-index: 9999; position: fixed; width: 100%; height: 102%; z-index: 9999;background-color:#fff;  }
+    .land img,.land div,.land p{ position: absolute;}
+    img.land_phone1,img.land_phone2{  left: 50%; margin-left: -5vw; width: 6vw ; top: 30%; }
+    .land_phone2{ z-index: 10; -webkit-animation: land_phone2 1.5s infinite ease-in-out; -webkit-transform-origin: 10% 90%;}
+    img.land_arrow{ width: 3.21vw; height: 2.59vw; left: 50%; margin-left: 4vw; top:36%;}
+    .land p{ position: absolute; -webkit-transform: scale(0.8); top: 68%; width: 100%; text-align: center; text-align: center; font-size: 3vw; color: #000;}
+    @keyframes land_phone2 {
+    0%,30%,100%{ -webkit-transform: rotate(90deg)}
+    55%,70%{ -webkit-transform: rotate(0deg)}
+    }
+  </style> -->
+
+  <!-- 横屏提示 -->
+  <!-- <div class="land pg">
+      <img src="img/land_phone.png" alt="" class="land_phone1">
+      <img src="img/land_phone.png" alt="" class="land_phone2">
+      <img src="img/land_arrow.png" alt="" class="land_arrow">
+      <p class="land_text">为了获取最佳体验，请竖屏浏览哟~</p>
+  </div> -->
+
+  <!-- <script type="text/javascript">
+    window.onload = function(){
+      var winW = window.innerWidth;
+      var winH = window.innerHeight;
+      
+      document.querySelector('.land').ontouchmove = function (e) {
+          return false
+      };
+      
+      if (winH / winW < 1.6) {
+          document.body.className = 'min';
+      }
+      if (winW > winH) {
+          document.querySelector('.land').style.display = 'block';
+      }
+      // 监听横竖屏
+      window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", function () {
+      
+          if (window.orientation === 180 || window.orientation === 0) {
+      
+              if (winH / winW < 1.6) {
+                  document.body.className = 'min';
+              } else {
+                  document.body.className = '';
+              }
+              document.querySelector('.land').style.display = 'none';
+          }
+          if (window.orientation === 90 || window.orientation === -90) {
+      
+              document.querySelector('.land').style.display = 'block';
+          }
+      }, false);
+  }
+  </script> -->

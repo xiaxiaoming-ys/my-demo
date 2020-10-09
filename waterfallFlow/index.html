@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+
+    .wrap{
+      position: relative;
+      width: 1050px;
+      margin: 0 auto;
+    }
+    .item{
+      position: absolute;
+      padding: 4px;
+      border: 1px solid #cccc;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="item"><img src="img/P_000.jpg" alt=""></div>
+    <div class="item"><img src="img/P_001.jpg" alt=""></div>
+    <div class="item"><img src="img/P_002.jpg" alt=""></div>
+    <div class="item"><img src="img/P_003.jpg" alt=""></div>
+    <div class="item"><img src="img/P_004.jpg" alt=""></div>
+    <div class="item"><img src="img/P_006.jpg" alt=""></div>
+    <div class="item"><img src="img/P_007.jpg" alt=""></div>
+    <div class="item"><img src="img/P_008.jpg" alt=""></div>
+    <div class="item"><img src="img/P_009.jpg" alt=""></div>
+    <div class="item"><img src="img/P_010.jpg" alt=""></div>
+  </div>
+
+  <script>
+    window.onload = function () {
+      var json = [
+          { "src": "./img/P_000.jpg" },
+          { "src": "./img/P_001.jpg" },
+          { "src": "./img/P_002.jpg" },
+          { "src": "./img/P_003.jpg" },
+          { "src": "./img/P_004.jpg" },
+          { "src": "./img/P_005.jpg" },
+          { "src": "./img/P_006.jpg" },
+          { "src": "./img/P_007.jpg" },
+          { "src": "./img/P_008.jpg" },
+          { "src": "./img/P_009.jpg" },
+          { "src": "./img/P_010.jpg" }
+      ];
+      var wrap = document.getElementsByClassName('wrap')[0],
+          items = wrap.getElementsByClassName('item');
+
+      var wrapW = wrap.offsetWidth,
+          itemW = items[0].offsetWidth;
+
+      var column = parseInt(wrapW / itemW),
+          spacing = (wrapW - itemW * column) / (column - 1);
+
+      var arr = [],
+          windowH = window.innerHeight;
+
+      waterFull()
+      addEvent()
+      
+      document.addEventListener('scroll', addEvent, false)
+
+      function addEvent() {
+        if(windowH + window.pageYOffset > getMin().min) {
+          var list = '';
+          json.forEach(function (el) {
+            list += '<div class="item"><img src="' + el.src + '" alt=""></div>'
+          })
+
+          wrap.innerHTML += list;
+          setTimeout(waterFull, 100)
+        }
+      }
+
+      function waterFull() {
+        for(var i = 0; i < items.length; i++) {
+          if(i < column) {
+            //第一行布局
+            items[i].style.left = i * (itemW + spacing) + 'px';
+            arr[i] = items[i].offsetHeight;
+          }else{
+            var min = getMin().min,
+                idx = getMin().idx;
+
+            items[i].style.top = min + spacing + 'px';
+            items[i].style.left = idx * (itemW + spacing) + 'px';
+
+            //刷新arr的数据
+            arr[idx] = min + spacing + items[i].offsetHeight;
+          }
+        }
+      }
+
+      function getMin() {
+        var min = arr[0],
+            idx = 0;
+
+        arr.forEach(function (el, index) {
+          if(el < min) {
+            min = el;
+            idx = index;
+          }
+        })
+
+        return {
+          min: min,
+          idx: idx
+        }
+      }
+    }
+
+
+  </script>
+</body>
+</html>

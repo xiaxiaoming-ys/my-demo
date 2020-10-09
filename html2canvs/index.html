@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <title>选择缩放位移合成图</title>
+  <!-- <link rel="stylesheet" href="//common.yscase.com/css/reset.css" type="text/css"/> -->
+  <link rel="stylesheet" href="css/index.css?v=1">
+</head>
+<body>
+  <div class="box" id="box">
+    
+    <div class="banner" id="banner">
+      <!-- banner背景图 -->
+      <img style="display: block;" class="p7_1_4" src="img/p7_1_4.png" alt="">
+      <p>邵阳市</p>
+      <p>麻辣小龙虾</p>
+    </div>
+
+    <!-- 用户上传图片盒子 -->
+    <div class="userImg">
+
+    </div>
+
+    <div class="btn">
+      <img src="img/p7_1_6.png" alt="">
+      <input id="camera" type="file" accept="image/*">
+    </div>
+  </div>
+  <img style="display: none; z-index: 99;" id="showImg" src="" alt="">
+
+  <button>确认合成图</button>
+
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/lrz.bundle.js"></script>
+  <script src="js/ImageEditor.js"></script>
+  <script src="js/html2canvas.js"></script>
+  
+
+  <script>
+    var box = document.getElementsByClassName('box')[0],
+        camera = document.getElementById('camera'),
+        banner = document.getElementsByClassName('banner')[0],
+        bnImg = banner.getElementsByTagName('img')[0],    //banner背景图
+        p = box.getElementsByTagName('p');
+
+    camera.addEventListener('change', changeCamera, false)
+
+    //用户上传图片
+    function changeCamera() {
+      if (!this.files[0]) return;
+      var can = document.createElement('canvas'),
+          ctx = can.getContext('2d');
+
+          can.width = 750;
+          can.height = 1200;
+
+      ctx.drawImage(bnImg, 0, 0, 750, 1200);
+
+      lrz(this.files[0], {  width: 1024 })
+        .then( (rst) => {
+          console.log(rst)
+          targetImg = rst.base64;
+            var options = {
+              imageUrls: [{
+                url: rst.base64,
+                closeButtonRequire: false,
+                removeIcon: false,
+                removeIconSize: 0,
+                width: $('.userImg').width(),
+                height: $('.userImg').height(),
+              }],
+              onInitCompleted: function (e) {
+                editor.selectImage(0);
+              }
+            };
+          window.editor = $('.userImg').ImageEditor(options);
+        })
+    }
+
+
+    /*
+        采用es6 的 promise语法 
+        html2canvas(element, options);
+        两个参数：所需要截图（合成图片）的元素id，需要配置的参数对象，
+        合成图后要执行的函数  canvas为合成图后返回的最后一个canvas
+    */
+
+    $('button').on('click', function () {
+      html2canvas(document.getElementById('box'), {
+          //可选参数
+          allowTaint : true,
+      }).then(function(canvas) {
+        var base64 = canvas.toDataURL( 'image/png', 1 );
+          $('.box').hide()
+          $('#showImg').attr('src', base64);
+          $('#showImg').show()
+          return 1
+      })
+    })
+
+
+
+
+  </script>
+</body>
+</html>

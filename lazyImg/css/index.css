@@ -1,0 +1,274 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+ul,li,ol{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+
+/*网页头部*/
+.header{
+	height: 80px;
+}
+.header_word{
+	width: 1200px;
+	margin: 0 auto;
+}
+.header_left{
+	width: 600px;
+	float: left;
+}
+.header_left-logo{
+	width: 200px;
+	height: 80px;
+	background: url(../img/logo.png) center no-repeat;
+	float: left;
+}
+.header_left > a{
+	display: inline-block;
+	line-height: 40px;
+	padding: 0 10px;
+	color: #555;
+	font-size: 14px;
+
+	position: relative;
+	top: -50%;
+	margin-top: 20px;
+}
+.header_left > a:nth-of-type(2):after{
+	content: "";
+	display: block;
+	width: 16px;
+	height: 16px;
+	background: url(../img/icon-new.png) center no-repeat;
+
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+.header_left > a:hover{
+	color: red;
+}
+
+
+.header_right{
+	width: 450px;
+	line-height: 80px;
+	float: right;
+}
+.header_right-form{
+	width: 180px;
+	height: 30px;
+	overflow: hidden;
+	float: left;
+
+	position: relative;
+	top: 50%;
+	margin-top: 25px;
+}
+.header_right-form input{
+	outline: none;
+	position: absolute;
+}
+.header_right-form input:first-of-type{
+	width: 150px;
+	height: 20px;
+	border: none;
+	border-bottom: 1px solid #000;
+	padding: 0 25px 0 5px;
+
+	top: 5px;
+}
+.header_right-form input:last-of-type{
+	width: 22px;
+	height: 22px;
+	background: url(../img/icon-1-sprite_w22.png) center no-repeat;
+	background-position: 0 0;
+	border: none;
+
+	right: 2px;
+	top: 3px;
+}
+.header_right-icon{
+	width: 200px;
+	height: 22px;
+	overflow: hidden;
+
+	position: relative;
+	top: 50%;
+	left: 20px;
+	margin-top: 26px;
+}
+.header_right-icon > div{
+	width: 22px;
+	height: 22px;
+	float: left;
+}
+.header_right-icon-1{
+	background: url(../img/icon-1-sprite_w22.png) center no-repeat;
+	background-position: 0 -66px;
+	margin-left: 30px;
+}
+.header_right-icon-2{
+	background: url(../img/icon-1-sprite_w22.png) center no-repeat;
+	background-position: 0 -45px;
+	margin: 0 30px;
+}
+.header_right-icon-3{
+	background: url(..//img/ava.jpg) center no-repeat;
+	background-size: cover;
+}
+
+
+
+/*图片轮播*/
+.section-1{
+	height: 490px;
+	position: relative;
+	background: #eee;
+}
+/*背景图填充*/
+.section_banner{
+	width: 100%;
+	height: 400px;
+	background: url(../img/bg.jpg) center no-repeat;
+	background-position: 0 0;
+	float: left;
+	background-size: cover;
+}
+.section-1_word{
+	width: 1200px;
+	height: 460px;
+	z-index: 999;
+
+	position: absolute;
+	top: 30px;
+	right: 50%;
+	margin-right: -600px;
+}
+
+/*轮播图片*/
+.section-1_round{
+	width: 1200px;
+	height: 460px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: center no-repeat;
+	display: none;
+}
+.section-1_round-1{
+	background: url(../img/c1.jpg);
+}
+.section-1_round-2{
+	background: url(../img/c2.jpg);
+}
+.section-1_round-3{
+	background: url(../img/c3.jpg);
+}
+.section-1_round-4{
+	background: url(../img/c4.jpg);
+}
+.section-1_round-5{
+	background: url(../img/c5.jpg);
+}
+
+/*轮播小圆点*/
+.section-1_round-ul{
+	width: 200px;
+	height: 14px;
+
+	position: absolute;
+	right: 10px;
+	bottom: 20px;
+}
+.section-1_round-ul > li{
+	width: 10px;
+	height: 10px;
+	background: #555;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	float: left;
+	margin-left: 10px;
+	cursor: pointer;
+}
+.section-1_round-ul .section-1_round-ul-active{
+	background: #fff;
+	border: 2px solid #555;
+}
+
+/*轮播左右箭头*/
+.section-1_round-lr{
+	width: 30px;
+	height: 50px;
+	color: #555;
+	font-size: 20px;
+	line-height: 50px;
+	text-align: center;
+	cursor: pointer;
+	display: none;
+
+	position: absolute;
+	top: 50%;
+	margin-top: -25px;
+}
+.section-1_round-lr:hover{
+	color: rgba(255,255,255,0.8);
+	background: rgba(0,0,0,0.3);
+}
+.section-1_round-right{
+	right: 0;
+}
+
+
+/*section-2内容*/
+.section-2{
+	width: 100%;
+	margin: 0 auto;
+	background: #eee;
+	box-shadow: 0 1px 2px #555;
+}
+.section-2_word{
+	width: 1200px;
+	margin: 0 auto;
+}
+/*清除浮动*/
+.section-2_title::after{
+	content: " ";
+	display: block;
+	clear: both;
+}
+.section-2_title-h3{
+	color: #555;
+	padding: 20px 0;
+	line-height: 20px;
+}
+.section-2_title-word{
+	width: 232px;
+	height: 260px;
+	border-radius: 3px;
+	float: left;
+	margin-right: 10px;
+	cursor: pointer;
+	background: #fff;
+	box-shadow: 0 0 6px #999; 
+	overflow: hidden;
+}
+.section-2_title-word:last-of-type{
+	margin-right: 0;
+}
+.section-2_title-word > img{
+	width: 232px;
+	height: 180px;
+	background-size: cover;
+}
+.section-2_title-word-text{
+	margin: 10px 0 0 20px;
+}
+.section-2_title-word-text span{
+	color: #555;
+	font-size: 12px;
+}

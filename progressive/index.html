@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文字逐行显示</title>
+  <!-- <link rel="stylesheet" href="//common.yscase.com/css/reset.css" type="text/css"/> -->
+  <style>
+    .box{
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+    .box p{
+      opacity: 0;
+      transform: translate3d(0, 20px, 0);
+    }
+    .xm_show{
+      opacity: 1 !important;
+      transform: translate3d(0, 0, 0) !important;
+      transition: all .5s !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <p>我是第一个p</p>
+    <p>我是第二个p</p>
+    <p>我是第三个p</p>
+    <p>我是第四个p</p>
+    <p>我是第五个p</p>
+  </div>
+
+
+  <script>
+    var p = document.querySelectorAll('p');
+
+    p.forEach( (el, idx) => {
+      setTimeout( () => {
+        el.classList.add('xm_show')
+      }, (idx + 1) * 300)
+    })
+
+  </script>
+</body>
+</html>

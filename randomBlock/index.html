@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{ margin: 0; padding: 0;}
+    .wrap{
+      position: relative;
+      width: 500px;
+      height: 500px;
+      background: #ddd;
+    }
+    .wrap div{
+      position: absolute;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrap"></div>
+
+
+  <script>
+    window.onload = function () {
+      var wrap = document.getElementsByClassName('wrap')[0];
+
+      function Nuall(opt) {
+        this.wrap = opt.wrap;
+        this.wrapW = this.wrap.offsetWidth;
+        this.wrapH = this.wrap.offsetHeight;
+        this.w = opt.w || 20;
+        this.h = opt.h || 20;
+      }
+
+      Nuall.prototype.init = function(num) {
+        var frg = document.createDocumentFragment();
+        for(var i = 0; i < num; i++) {
+          var div = document.createElement('div');
+          var r = getRan(0, 255),
+              g = getRan(0, 255),
+              b = getRan(0, 255);
+
+          div.style.width = this.w + 'px';
+          div.style.height = this.h + 'px';
+          div.style.background = 'rgb(' + r + ',' + g + ',' + b + ')';
+          div.style.top = getRan(0, this.wrapH - this.h) + 'px';
+          div.style.left = getRan(0, this.wrapW - this.w) + 'px';
+          frg.appendChild(div)
+        }
+        this.wrap.appendChild(frg)
+      }
+      Nuall.prototype.ranPosition = function() {
+        var son = this.wrap.children;
+
+        for(var i = 0; i < son.length; i++) {
+          son[i].style.top = getRan(0, this.wrapH - this.h) + 'px';
+          son[i].style.left = getRan(0, this.wrapW - this.w) + 'px';
+        }
+      }
+
+      var nuall = new Nuall({
+        wrap: wrap,
+        w: 50,
+        h: 50
+      });
+      nuall.init(5)
+
+      setInterval(function () {
+        nuall.ranPosition()
+      }, 300);
+
+      function getRan(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min; //含最大值，含最小值 
+      }
+    }
+  </script>
+
+
+  <script>
+    function fun(opt) {
+      console.log('name为' + opt.name)
+      console.log('age为' + opt.age)
+      console.log('sex为' + opt.sex)
+    }
+
+    fun({
+      age: 18,
+      name: '曹德',
+      sex: '男',
+    })
+
+
+
+  </script>
+</body>
+</html>

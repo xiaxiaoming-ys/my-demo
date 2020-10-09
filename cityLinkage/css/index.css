@@ -1,0 +1,66 @@
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+.wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.wrap a {
+  text-decoration: none;
+  color: #424242;
+}
+.wrap ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.wrap .select-list {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 100%;
+}
+.wrap .select-list .select {
+  position: relative;
+  width: 100px;
+  height: 30px;
+  margin-top: 10px;
+  border-radius: 5px;
+  background: orange;
+}
+.wrap .select-list .select .res {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  text-align: center;
+  line-height: 30px;
+}
+.wrap .select-list .select .dropdown {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 0px;
+  max-height: 200px;
+  background: #fff;
+  box-shadow: 0 0 3px #999;
+  transition: .3s;
+  overflow: auto;
+}
+.wrap .select-list .select .dropdown .dd-item {
+  width: 100%;
+  height: 30px;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 30px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
